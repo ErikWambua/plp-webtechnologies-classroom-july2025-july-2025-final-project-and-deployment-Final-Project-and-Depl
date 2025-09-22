@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Sustainable Living Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <i class="fas fa-leaf"></i>
+                <h1>EcoTrack</h1>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link active" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('calculator')">Calculator</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('tips')">Tips</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('about')">About</a></li>
+            </ul>
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="btn btn-outline" id="darkModeToggle">
+                    <i class="fas fa-moon"></i> Dark Mode
+                </button>
+                <button class="btn btn-outline" onclick="showPage('login')">Login</button>
+                <button class="btn btn-primary" onclick="showPage('register')">Register</button>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container hero-content">
+                    <h2>Track Your Carbon Footprint, Save Our Planet</h2>
+                    <p>Join thousands of environmentally conscious individuals reducing their carbon footprint with our easy-to-use calculator and personalized tips.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-accent" onclick="showPage('calculator')">Calculate Now</button>
+                        <button class="btn btn-outline" onclick="showPage('register')">Join Our Community</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Why Track Your Carbon Footprint?</h2>
+                        <p>Understanding your environmental impact is the first step toward making sustainable changes</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud-sun"></i>
+                            </div>
+                            <h3>Climate Change Awareness</h3>
+                            <p>Understand how your daily activities contribute to global greenhouse gas emissions.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Track Your Progress</h3>
+                            <p>Monitor your reduction efforts over time and see the positive impact you're making.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Personalized Tips</h3>
+                            <p>Receive customized recommendations based on your lifestyle and consumption patterns.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard" class="page">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2 class="greeting" id="timeGreeting">Welcome Back</h2>
+                    <p class="user-name" id="userName">User</p>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="stat-value" id="currentFootprint">0</div>
+                        <div class="stat-label">Current Footprint (kg CO2/month)</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value" id="reductionPercent">0%</div>
+                        <div class="stat-label">Reduction This Month</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-value" id="treesSaved">0</div>
+                        <div class="stat-label">Trees Saved Equivalent</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-value" id="currentStreak">0</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div class="content-grid">
+                        <div class="content-card">
+                            <h3>Recent Activity</h3>
+                            <ul class="activity-list" id="activityList">
+                                <!-- Activities will be populated by JavaScript -->
+                            </ul>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h3>Footprint History</h3>
+                            <canvas id="footprintChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h3>Personalized Tips</h3>
+                            <div class="tips-list" id="personalizedTips">
+                                <!-- Tips will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h3>Quick Actions</h3>
+                            <div class="quick-actions">
+                                <button class="btn btn-primary" onclick="showPage('calculator')">Calculate Footprint</button>
+                                <button class="btn btn-outline" onclick="showPage('tips')">View Tips</button>
+                                <button class="btn btn-accent" id="shareProgressBtn">Share Progress</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Page -->
+        <section id="calculator" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Carbon Footprint Calculator</h2>
+                    <p>Calculate your personal carbon emissions based on your lifestyle choices</p>
+                </div>
+                
+                <div class="calculator-container">
+                    <div>
+                        <div class="calculator-form">
+                            <div class="form-group">
+                                <label for="period">Time Period</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="period" value="weekly" checked> Weekly
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="period" value="monthly"> Monthly
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="electricity">Electricity Usage (kWh)</label>
+                                <input type="number" id="electricity" placeholder="e.g., 200">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="car">Car Travel (km)</label>
+                                <input type="number" id="car" placeholder="e.g., 100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="public-transport">Public Transport (km)</label>
+                                <input type="number" id="public-transport" placeholder="e.g., 50">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="diet">Diet Type</label>
+                                <select id="diet">
+                                    <option value="vegan">Vegan</option>
+                                    <option value="vegetarian">Vegetarian</option>
+                                    <option value="meat-low">Meat - Low</option>
+                                    <option value="meat-medium">Meat - Medium</option>
+                                    <option value="meat-high">Meat - High</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="calculateBtn">Calculate My Footprint</button>
+                            
+                            <div class="calculator-result" id="resultContainer" style="display: none;">
+                                <h3>Your Carbon Footprint</h3>
+                                <p id="result">0 kg CO2/month</p>
+                                <canvas id="footprintChartCalc" width="400" height="200"></canvas>
+                                
+                                <div class="action-buttons">
+                                    <button class="btn btn-outline" id="saveResultBtn">Save Result</button>
+                                    <button class="btn btn-accent" id="downloadResultBtn">Download Result</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <img src="https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Carbon footprint calculation" style="width: 100%; border-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Page -->
+        <section id="tips" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Reduction Tips</h2>
+                    <p>Practical ways to reduce your carbon footprint based on your lifestyle</p>
+                </div>
+                
+                <div class="tips-grid">
+                    <div class="tip-card" id="transportTip">
+                        <div class="tip-image">
+                            <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Energy saving tips">
+                        </div>
+                        <div class="tip-content">
+                            <h3>Energy Saving</h3>
+                            <p>Switch to LED bulbs, unplug electronics when not in use, and use energy-efficient appliances.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-card" id="transportTip2">
+                        <div class="tip-image">
+                            <img src="https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Transportation tips">
+                        </div>
+                        <div class="tip-content">
+                            <h3>Transportation</h3>
+                            <p>Use public transport, carpool, bike, or walk whenever possible to reduce emissions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-image">
+                            <img src="https://images.pexels.com/photos/6608313/pexels-photo-6608313.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Diet tips">
+                        </div>
+                        <div class="tip-content">
+                            <h3>Sustainable Diet</h3>
+                            <p>Reduce meat consumption, buy local produce, and minimize food waste.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About EcoTrack</h2>
+                    <p>Our mission is to promote sustainable living through awareness and action</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://images.pexels.com/photos/2886937/pexels-photo-2886937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="About EcoTrack">
+                    </div>
+                    
+                    <div>
+                        <h3>Our Vision</h3>
+                        <p>EcoTrack was founded with the vision of creating a more sustainable future by empowering individuals to understand and reduce their environmental impact.</p>
+                        
+                        <p>We believe that small changes, when multiplied by millions of people, can transform the world. Our carbon footprint calculator provides personalized insights and actionable recommendations to help you make a difference.</p>
+                        
+                        <p>By tracking your progress and connecting with a community of like-minded individuals, you can contribute to global efforts against climate change while adopting a more sustainable lifestyle.</p>
+                        
+                        <button class="btn btn-primary" onclick="showPage('register')">Join Our Community</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section id="login" class="page">
+            <div class="container auth-page">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <a href="#" class="logo" onclick="showPage('home')">
+                            <i class="fas fa-leaf"></i>
+                            <span>EcoTrack</span>
+                        </a>
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to your account to continue your sustainability journey</p>
+                    </div>
+                    
+                    <form class="auth-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" name="password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                        
+                        <div class="form-footer">
+                            <p>Don't have an account? <a href="#" onclick="showPage('register')">Sign up</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Page -->
+        <section id="register" class="page">
+            <div class="container auth-page">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <a href="#" class="logo" onclick="showPage('home')">
+                            <i class="fas fa-leaf"></i>
+                            <span>EcoTrack</span>
+                        </a>
+                        <h2>Create Your Account</h2>
+                        <p>Join our community and start tracking your carbon footprint today</p>
+                    </div>
+                    
+                    <form class="auth-form" id="registerForm">
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input type="text" id="registerName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">Email Address</label>
+                            <input type="email" id="registerEmail" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" name="password" required>
+                            <div class="password-strength">
+                                <div class="strength-bar"></div>
+                                <div class="strength-text"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerConfirm">Confirm Password</label>
+                            <input type="password" id="registerConfirm" name="confirmPassword" required>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                        
+                        <div class="form-footer">
+                            <p>Already have an account? <a href="#" onclick="showPage('login')">Sign in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EcoTrack</h3>
+                    <p>Helping you reduce your carbon footprint one step at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('calculator')">Calculator</a></li>
+                        <li><a href="#" onclick="showPage('tips')">Tips</a></li>
+                        <li><a href="#" onclick="showPage('about')">About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Climate News</a></li>
+                        <li><a href="#">Research</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@ecotrack.com">info@ecotrack.com</a></li>
+                        <li><a href="tel:+254798264246">+254 798 264 246</a></li>
+                        <li><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 EcoTrack. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-robot"></i>
+                <h3>EcoBot Assistant</h3>
+            </div>
+            <button class="close-chatbot" id="closeChatbot">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>Hello! I'm EcoBot, your AI assistant for all things related to carbon footprint and sustainability. How can I help you today?</p>
+                    <span class="message-time">Just now</span>
+                </div>
+            </div>
+            
+            <!-- Quick questions suggestions -->
+            <div class="quick-questions">
+                <p>Try asking me:</p>
+                <div class="question-chips">
+                    <button class="question-chip" data-question="How can I reduce my carbon footprint?">Reduction tips</button>
+                    <button class="question-chip" data-question="What is carbon footprint?">What is carbon footprint?</button>
+                    <button class="question-chip" data-question="How does diet affect carbon footprint?">Diet impact</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Ask me about carbon footprint, sustainability...">
+            <button id="sendMessage">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+        <span class="notification-dot"></span>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
