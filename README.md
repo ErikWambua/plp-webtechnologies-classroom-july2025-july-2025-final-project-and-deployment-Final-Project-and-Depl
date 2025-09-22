@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🌱 EcoTrack - Sustainable Living Platform
 
 EcoTrack is a comprehensive web application designed to help individuals **track and reduce their carbon footprint** through an intuitive calculator, personalized tips, and progress monitoring.
